@@ -9,4 +9,5 @@ public interface UserCredentialDao {
     public List<UserCredentials> getUserCredentials();
     public List<UserCredentials> findByUserId(String id);
     public List<UserCredentials> findByPaymentMethodId(String id);
+    public List<UserCredentials> findByUserIdAndPaymentMethodId(String userid, String methodid);
 }

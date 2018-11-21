@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface UserCredentialsService {
     List<UserCredentials> getByPaymentMethodId(String id);
+    List<UserCredentials> getByUserNameAndByPaymentMethodId(String userid, String methodid);
     List<UserCredentials> getByUserId(String id);
     List<UserCredentials> getAllUserCredentials();
 }

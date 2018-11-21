@@ -5,6 +5,8 @@ import com.payment.service.dto.beans.UserCredentials;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -38,6 +40,17 @@ public class UserCredentialsDaoImpl implements UserCredentialDao {
         Criteria cr = session.createCriteria(UserCredentials.class);
         cr.add(Restrictions.eq("paymentmethodid", id));
         return cr.list();
+    }
+
+    @Override
+    public List<UserCredentials> findByUserIdAndPaymentMethodId(String userid, String methodid) {
+        Session session = sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(UserCredentials.class);
+        Criterion user = Restrictions.eq("userid", userid);
+        Criterion method = Restrictions.eq("paymentmethodid", methodid);
+        LogicalExpression expression = Restrictions.and(user, method);
+        criteria.add(expression);
+        return criteria.list();
     }
 
 }

@@ -21,6 +21,11 @@ public class UserCredentialsServiceImpl implements UserCredentialsService {
     }
 
     @Override
+    public List<UserCredentials> getByUserNameAndByPaymentMethodId(String userid, String methodid) {
+        return userCredentialDao.findByUserIdAndPaymentMethodId(userid, methodid);
+    }
+
+    @Override
     public List<UserCredentials> getByUserId(String id) {
         return userCredentialDao.findByUserId(id);
     }
