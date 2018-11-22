@@ -1,21 +1,19 @@
 package com.payment.service.dto.beans;
 
+import com.payment.service.dto.utils.PaymentStatus;
 import org.springframework.lang.NonNull;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
-@Table(name = "payment")
-public class Payment implements Serializable {
+@Table(name = "failed_payment")
+public class FailedPayment implements Serializable{
     private static final long serialVersionUID = 1L;
     /**
      * Identifier of the payment resource created.
@@ -74,7 +72,7 @@ public class Payment implements Serializable {
     /**
      * Parameterized Constructor
      */
-    public Payment(String payerid, String currency, float amount, String payeeId, String paymentMethodId, String paymentDescription, String paymentnumber) {
+    public FailedPayment(String payerid, String currency, float amount, String payeeId, String paymentMethodId, String paymentDescription, String paymentnumber) {
         super();
         this.paymentid = UUID.randomUUID().toString();
         this.amount = amount;
@@ -88,7 +86,7 @@ public class Payment implements Serializable {
     /**
      * Default Constructor
      */
-    public Payment(){
+    public FailedPayment(){
 
     }
 
@@ -196,5 +194,21 @@ public class Payment implements Serializable {
         return "Payment [paymentid=" + paymentid + ", payerid=" + payerid + ", payeeid=" + payeeid +
                 ", paymentdescription=" + paymentdescription + ", paymentmethodid=" + paymentmethodid +
                 ", amount=" + amount + ", currency=" + currency + ", paymentnumber=" + paymentnumber + "]";
+    }
+
+    /**
+     * method helper to copy original payment that failed into to
+     * the failed one.
+     * @param payment
+     */
+    public void copyFromPayment(Payment payment){
+        this.setAmount(payment.getAmount());
+        this.setCurrency(payment.getCurrency());
+        this.setPayeeid(payment.getPayeeid());
+        this.setPayerid(payment.getPayerid());
+        this.setPaymentdescription(payment.getPaymentdescription());
+        this.setPaymentmethodid(payment.getPaymentmethodid());
+        this.setPaymentnumber(payment.getPaymentnumber());
+        this.setPaymentid(payment.getPaymentid());
     }
 }

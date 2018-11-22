@@ -1,6 +1,7 @@
 package com.payment.service.dto.dao;
 
 
+import com.payment.service.dto.beans.FailedPayment;
 import com.payment.service.dto.beans.Payment;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -12,30 +13,31 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class PaymentDaoImpl implements PaymentDao {
+public class FailedPaymentDaoImpl implements FailedPaymentDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void addPayment(Payment payment) {
+    public void addPayment(FailedPayment payment) {
+        // TODO Auto-generated method stub
         Session session = sessionFactory.getCurrentSession();
         session.save(payment);
     }
 
-    public List<Payment> getPayments() {
+    public List<FailedPayment> getPayments() {
         Session session = sessionFactory.getCurrentSession();
-        List<Payment> list= session.createCriteria(Payment.class).list();
+        List<FailedPayment> list= session.createCriteria(FailedPayment.class).list();
         return list;
     }
 
-    public Payment findById(String id) {
+    public FailedPayment findById(String id) {
         Session session = sessionFactory.getCurrentSession();
-        Payment payment=(Payment) session.get(Payment.class,id);
+        FailedPayment payment=(FailedPayment) session.get(FailedPayment.class,id);
         return payment;
     }
 
-    public Payment update(Payment val, String id) {
+    public FailedPayment update(FailedPayment val, String id) {
         Session session = sessionFactory.getCurrentSession();
-        Payment payment =(Payment)session.get(Payment.class, id);
+        FailedPayment payment =(FailedPayment)session.get(FailedPayment.class, id);
         payment.setPayeeid(val.getPayeeid());
         payment.setPayerid(val.getPayerid());
         payment.setPaymentmethodid(val.getPaymentmethodid());
@@ -51,7 +53,7 @@ public class PaymentDaoImpl implements PaymentDao {
 
     public void delete(String id) {
         Session session = sessionFactory.getCurrentSession();
-        Payment payment = findById(id);
+        FailedPayment payment = findById(id);
         if(payment!=null) {
             session.delete(payment);
         }
@@ -59,17 +61,17 @@ public class PaymentDaoImpl implements PaymentDao {
 
 
     @Override
-    public List<Payment> findAllPaymentsByPayerId(String id) {
+    public List<FailedPayment> findAllPaymentsByPayerId(String id) {
         Session session = sessionFactory.getCurrentSession();
-        Criteria cr = session.createCriteria(Payment.class);
+        Criteria cr = session.createCriteria(FailedPayment.class);
         cr.add(Restrictions.eq("payerid", id));
         return cr.list();
     }
 
     @Override
-    public List<Payment> findAllPaymentsByPayeeId(String id) {
+    public List<FailedPayment> findAllPaymentsByPayeeId(String id) {
         Session session = sessionFactory.getCurrentSession();
-        Criteria cr = session.createCriteria(Payment.class);
+        Criteria cr = session.createCriteria(FailedPayment.class);
         cr.add(Restrictions.eq("payeeid", id));
         return cr.list();
     }

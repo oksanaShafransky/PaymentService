@@ -12,16 +12,32 @@ public class UserCredentials implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @NotNull
+    /**
+     * User id.
+     */
     String userid;
+    /**
+     * Payment id.
+     */
+    @Id
     @NotNull
     String paymentmethodid;
+    /**
+     * Payment number of user for payment method id.
+     */
     @NotNull
     String paymentnumber;
 
+    /**
+     * Default Constructor
+     */
     UserCredentials(){
 
     }
 
+    /**
+     * Parameterized Constructor
+     */
     UserCredentials(String userid, String paymentmethodid, String paymentnumber){
         super();
         this.userid = userid;
@@ -29,6 +45,7 @@ public class UserCredentials implements Serializable{
         this.paymentnumber = paymentnumber;
     }
 
+    //getters and setters
     public String getUserid() {
         return userid;
     }

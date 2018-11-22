@@ -14,20 +14,33 @@ public class PaymentMethod implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @NotNull
+    /**
+     * Payment method unique identifier.
+     */
     private String paymentmethodid; //GUID
+    /**
+     * Payment method name.
+     */
     @NotNull
     private String methodname;
 
+    /**
+     * Default Constructor
+     */
     public PaymentMethod(){
 
     }
 
+    /**
+     * Parameterized Constructor
+     */
     public PaymentMethod(String methodname){
         super();
         this.paymentmethodid = UUID.randomUUID().toString();
         this.methodname = methodname;
     }
 
+    //getters and setters
     public String getPaymentmethodid() {
         return paymentmethodid;
     }

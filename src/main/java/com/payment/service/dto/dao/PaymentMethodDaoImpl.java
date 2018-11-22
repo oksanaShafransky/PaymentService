@@ -20,7 +20,6 @@ public class PaymentMethodDaoImpl implements PaymentMethodDao {
     @Override
     public List<PaymentMethod> getPaymentMethods() {
         Session session = sessionFactory.getCurrentSession();
-        @SuppressWarnings("unchecked")
         List<PaymentMethod> list= session.createCriteria(PaymentMethod.class).list();
         return list;
     }

@@ -14,18 +14,33 @@ import javax.validation.constraints.Email;
 @Table(name="user")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
+    /**
+     * User identifier for payment system.
+     */
     @Id
     @NotNull
     private String userid;
+    /**
+     * User name.
+     */
     @NonNull
     private String username;
+    /**
+     * User mail.
+     */
     @Email(message = "Email should be valid")
     private String usermail;
 
+    /**
+     * Default Constructor
+     */
     public User(){
 
     }
 
+    /**
+     * Parameterized Constructor
+     */
     public User(String userid, String username, String usermail){
         super();
         this.userid = UUID.randomUUID().toString();
@@ -33,6 +48,7 @@ public class User implements Serializable {
         this.usermail = usermail;
     }
 
+    //setters and getters
     public String getUserid() {
         return userid;
     }
