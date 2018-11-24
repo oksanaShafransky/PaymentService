@@ -11,4 +11,5 @@ public interface UserService {
     boolean addUser(User user);
     void updateUser(User user);
     void deleteUser(String userid);
+    User authenticateUser(String usermail, String userpassword);
 }

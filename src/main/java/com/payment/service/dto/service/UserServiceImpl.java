@@ -49,4 +49,9 @@ public class UserServiceImpl implements UserService {
         userDao.delete(userId);
     }
 
+    @Override
+    public User authenticateUser(String usermail, String userpassword) {
+        return userDao.authenticateUser(usermail, userpassword);
+    }
+
 }

@@ -25,11 +25,22 @@ public class User implements Serializable {
      */
     @NonNull
     private String username;
+
+    /**
+     * User password.
+     */
+    @NonNull
+    private String userpassword;
     /**
      * User mail.
      */
     @Email(message = "Email should be valid")
     private String usermail;
+    /**
+     * User address.
+     */
+    @NonNull
+    private String useraddress;
 
     /**
      * Default Constructor
@@ -41,10 +52,12 @@ public class User implements Serializable {
     /**
      * Parameterized Constructor
      */
-    public User(String userid, String username, String usermail){
+    public User(String userid, String username, String userpassword, String usermail,String useraddress){
         super();
         this.userid = UUID.randomUUID().toString();
         this.username = username;
+        this.userpassword=userpassword;
+        this.useraddress=useraddress;
         this.usermail = usermail;
     }
 
@@ -70,6 +83,21 @@ public class User implements Serializable {
     }
 
     public void setUsermail(String usermail) { this.usermail = usermail; }
+    public String getUserpassword() {
+        return userpassword;
+    }
+
+    public void setUserpassword(String userpassword) {
+        this.userpassword = userpassword;
+    }
+
+    public String getUseraddress() {
+        return useraddress;
+    }
+
+    public void setUseraddress(String useraddress) {
+        this.useraddress = useraddress;
+    }
 
     @Override
     public boolean equals(Object obj) {

@@ -2,9 +2,12 @@ package com.payment.service.dto.dao;
 
 import com.payment.service.dto.beans.Payment;
 import com.payment.service.dto.beans.User;
+import com.payment.service.dto.beans.UserCredentials;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -64,5 +67,16 @@ public class UserDaoImpl implements UserDao {
         if(user!=null) {
             session.delete(user);
         }
+    }
+
+    @Override
+    public User authenticateUser(String mail, String password) {
+        Session session = sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(User.class);
+        Criterion usermail = Restrictions.eq("usermail", mail);
+        Criterion userpassword = Restrictions.eq("userpassword", password);
+        LogicalExpression expression = Restrictions.and(usermail, userpassword);
+        criteria.add(expression);
+        return (User) criteria.list().get(0);
     }
 }

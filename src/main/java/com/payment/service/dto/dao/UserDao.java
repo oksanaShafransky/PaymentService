@@ -11,4 +11,5 @@ public interface UserDao {
     public User findByMail(String mail);
     public User update(User user, String id);
     public void delete(String id);
+    public User authenticateUser(String usermail, String userpassword);
 }

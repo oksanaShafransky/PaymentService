@@ -2,14 +2,12 @@ package com.payment.service.dto.beans;
 
 import org.springframework.lang.NonNull;
 
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -22,20 +20,23 @@ public class Payment implements Serializable {
      */
     @Id
     private String paymentid;//GUID
-    @NotNull
     /**
      * User id that payed.
      */
-    private String payerid; //user that perform payment - GUID
     @NotNull
+    @JoinTable(name = "user", joinColumns = @JoinColumn(name = "userid"))
+    private String payerid; //user that perform payment - GUID
     /**
      * User id that receives the payment.
      */
+    @NotNull
+    @JoinTable(name = "user", joinColumns = @JoinColumn(name = "userid"))
     private String payeeid; //user to whom to pay - GUID
     /**
      * Payment method id that represents gateway through which the payment is performed.
      */
     @NotNull
+    @JoinTable(name = "paymentmethod", joinColumns = @JoinColumn(name = "paymentmethodid"))
     private String paymentmethodid;//GUID
     /**
      * Sum to be payed - positive number greater then zero.
@@ -56,6 +57,8 @@ public class Payment implements Serializable {
      * Payment number - card or bank account number the payment is payed
      */
     @NotNull
+    @NotNull
+    @JoinTable(name = "usercredentials", joinColumns = @JoinColumn(name = "paymentnumber"))
     private String paymentnumber;
     /**
      * Status of payment, can be FAILED, SUCCEEDED, INPROCESS
